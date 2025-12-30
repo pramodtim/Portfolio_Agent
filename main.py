@@ -12,7 +12,7 @@ app = FastAPI()
 # Allow your frontend URL to access backend
 app.add_middleware(
     CORSMiddleware,
-    allow_origins=["*"],  # Replace * with your frontend URL in production
+    allow_origins=["https://pramodtim.netlify.app/"],  # Replace * with your frontend URL in production
     allow_methods=["*"],
     allow_headers=["*"]
 )
@@ -65,4 +65,5 @@ async def chat_endpoint(request: Request):
     except Exception as e:
         print("Error calling Groq API:", e)
         return {"reply": "Sorry, something went wrong with the backend."}
+
 
