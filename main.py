@@ -8,15 +8,16 @@ load_dotenv()
 
 app = FastAPI()
 
-# ✅ CORS FIX
+# ✅ CORS FIX: allow only your Netlify site
 app.add_middleware(
     CORSMiddleware,
-    allow_origins=["*"],   # 👈 IMPORTANT
-    allow_credentials=False,
+    allow_origins=[
+        "https://pramodtim.netlify.app"
+    ],
+    allow_credentials=True,
     allow_methods=["*"],
     allow_headers=["*"],
 )
-
 
 # Groq client
 client = Groq(api_key=os.getenv("GROQ_API_KEY"))
@@ -64,4 +65,3 @@ async def chat_endpoint(request: Request):
     except Exception as e:
         print("Groq error:", e)
         return {"reply": "Sorry, something went wrong with the backend."}
-
